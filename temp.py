@@ -1,5 +1,2 @@
-import os, sys  # noqa
-
-
-print(sys)
-print(os)
+def add(a: int, b: int) -> int:
+    return a + b
