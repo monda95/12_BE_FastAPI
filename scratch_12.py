@@ -1,4 +1,7 @@
-from urllib import request
+import json
+import timeit
+
+import orjson
 
 TWITTER_JSON = """
 {
@@ -147,9 +150,7 @@ TWITTER_JSON = """
       "geo": null
 }
 """
-import json
-import timeit
-import orjson
+
 
 print(timeit.timeit(lambda: json.dumps(TWITTER_JSON)))
 print(timeit.timeit(lambda: orjson.dumps(TWITTER_JSON)))
