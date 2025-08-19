@@ -75,8 +75,9 @@ jobs:
       - name: Start Mysql
         run: |  # | (파이프라인) 은 yaml 문법인데, value 를 multi-line 으로 쓰고 싶을때 사용합니다.
           sudo systemctl start mysql
-          mysql -e "use mysql; FLUSH PRIVILEGES; ALTER USER '${{ env.MYSQL_USER }}'@'localhost' IDENTIFIED BY '${{ env.MYSQL_PASSWORD }}';" -uroot -proot
-          mysql -e 'CREATE DATABASE ${{ env.MYSQL_DATABASE }};' -u${{ env.MYSQL_USER }} -p${{ env.MYSQL_PASSWORD }}
+          mysql -e "CREATE USER IF NOT EXISTS '${{ env.MYSQL_USER }}'@'localhost' IDENTIFIED BY '${{ env.MYSQL_PASSWORD }}';" -uroot -proot
+          mysql -e "GRANT ALL PRIVILEGES ON ${{ env.MYSQL_DATABASE }}.* TO '${{ env.MYSQL_USER }}'@'localhost';" -uroot -proot
+          mysql -e 'CREATE DATABASE IF NOT EXISTS ${{ env.MYSQL_DATABASE }};' -u${{ env.MYSQL_USER }} -p${{ env.MYSQL_PASSWORD }}
 
       - name: Run tests
         run: |
