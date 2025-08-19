@@ -14,7 +14,7 @@ class Config(BaseSettings):
 
     MYSQL_HOST: str = "localhost"
     MYSQL_USER: str = "root"
-    MYSQL_PASSWORD: str = "dada0605"
+    MYSQL_PASSWORD: str = "1234"
     MYSQL_DB: str = "meeting"
     MYSQL_PORT: int = 3306
     MYSQL_CONNECT_TIMEOUT: int = 5
