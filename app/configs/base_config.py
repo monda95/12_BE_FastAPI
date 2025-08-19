@@ -19,4 +19,3 @@ class Config(BaseSettings):
     MYSQL_PORT: int = 3306
     MYSQL_CONNECT_TIMEOUT: int = 5
     CONNECTION_POOL_MAXSIZE: int = 30
-wlrm
