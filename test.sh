@@ -13,7 +13,7 @@ poetry run ruff check --fix
 echo "OK"
 
 echo "Starting mypy"
-poetry run mypy .
+poetry run dmypy run -- .
 echo "OK"
 
 echo "Starting pytest with coverage"
@@ -22,3 +22,4 @@ poetry run coverage report -m
 poetry run coverage html
 
 echo "${COLOR_GREEN}All tests passed successfully!${COLOR_NC}"
+

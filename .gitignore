@@ -1,2 +1,5 @@
 .coverage
-.idea
+.idea/
+__pycache__/
+.qodo
+.dmypy.json
