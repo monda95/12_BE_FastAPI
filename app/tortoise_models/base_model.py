@@ -3,7 +3,7 @@ from tortoise import fields
 
 class BaseModel:
     id = fields.BigIntField(pk=True)
-    create_at = fields.DatetimeField(auto_now_add=True)
+    created_at = fields.DatetimeField(auto_now_add=True)
 
 
 # MySQL : primary key 를 정할 때 주의해야 하는 점

@@ -42,7 +42,7 @@ omit = ["*/test_*.py"]
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "session"
-filterwarnings = ['ignore::DeprecationWarning']  # 추가!
+filterwarnings = ["ignore::DeprecationWarning"]
 
 [tool.aerich]
 tortoise_orm = "app.configs.tortoise_config.TORTOISE_ORM"
