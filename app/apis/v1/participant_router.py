@@ -1,4 +1,3 @@
-
 from fastapi import APIRouter
 
 from app.dtos.create_participant_request import CreateParticipantRequest
