@@ -11,7 +11,7 @@ from app.tortoise_models.participant import ParticipantModel
 
 class ParticipantDateModel(BaseModel, Model):
     participant: fields.ForeignKeyRelation[ParticipantModel] = fields.ForeignKeyField(
-        "models.ParticipantModel", related_name="participant_date", db_constraint=False
+        "models.ParticipantModel", related_name="participant_dates", db_constraint=False, index=True
     )
     date = fields.DateField()
     enabled = fields.BooleanField(default=True)
@@ -27,10 +27,30 @@ class ParticipantDateModel(BaseModel, Model):
         )
 
     @classmethod
-    async def get_all_bt_participant_id(cls, participant_id: int) -> list[ParticipantDateModel]:
+    async def get_all_by_participant_id(cls, participant_id: int) -> list[ParticipantDateModel]:
         return (
             await ParticipantDateModel.filter(participant_id=participant_id)
             .limit(MEETING_DATE_MAX_RANGE.days)
             .order_by("date")
             .all()
         )
+
+    @classmethod
+    async def delete_by_participant_id(cls, participant_id: int) -> int:
+        return await cls.filter(participant_id=participant_id).delete()
+
+    @classmethod
+    async def on(cls, participant_date_id: int) -> None:
+        await cls.filter(id=participant_date_id).update(enabled=True)
+
+    @classmethod
+    async def off(cls, participant_date_id: int) -> None:
+        await cls.filter(id=participant_date_id).update(enabled=False, starred=False)
+
+    @classmethod
+    async def star(cls, participant_date_id: int) -> None:
+        await cls.filter(id=participant_date_id).update(enabled=True, starred=True)
+
+    @classmethod
+    async def unstar(cls, participant_date_id: int) -> None:
+        await cls.filter(id=participant_date_id).update(starred=False)
